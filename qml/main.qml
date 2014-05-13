@@ -18,16 +18,26 @@
  * Authors: Fabien Proriol
  */
 
-#include <sailfishapp.h>
-#include <QtQuick>
 
-int main(int argc, char *argv[])
+import QtQuick 2.0
+
+import Sailfish.Silica 1.0
+import "pages/storage.js" as Storage
+import "pages/speed.js" as Speed
+import "pages"
+
+ApplicationWindow
 {
-    QGuiApplication *app = SailfishApp::application(argc, argv);
-    QQuickView *view = SailfishApp::createView();
+    property int scoreItem
+    property int scoreBest
+    property int scoreHigh
 
-    view->setSource(SailfishApp::pathTo("qml/main.qml"));
-    view->showFullScreen();
+    id: app
+    initialPage: mainPage
+    cover: Qt.resolvedUrl("cover/CoverPage.qml")
+    Component.onCompleted: mainPage.newGameRequest()
 
-    return app->exec();
+    MainPage {
+        id: mainPage
+    }
 }

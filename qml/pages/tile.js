@@ -1,3 +1,24 @@
+/**
+ * qml2048, 2048 Game
+ *
+ * Copyright (C) 2014 Fabien Proriol
+ *
+ * This file is part of qml2048.
+ *
+ * qml2048 is free software: you can redistribute it and/or modify it under the terms of the
+ * GNU General Public License as published by the Free Software Foundation, either version 3 of the
+ * License, or (at your option) any later version.
+ *
+ * qml2048 is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
+ * without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+ *
+ * See the GNU General Public License for more details. You should have received a copy of the GNU
+ * General Public License along with CarBudget. If not, see <http://www.gnu.org/licenses/>.
+ *
+ * Authors: Fabien Proriol
+ */
+
+
 // show tile with animation
 function show() {
     updateColor()
@@ -6,7 +27,7 @@ function show() {
     labelContainer.center_x = x
     labelContainer.center_y = y
     show_anim.to = cell.width
-    show_anim.duration = Storage.animation_speed
+    show_anim.duration = 200
     show_anim.start()
 }
 
@@ -15,9 +36,12 @@ function move() {
     if (merged_cell)
         merged_cell.move()
     if (new_x && new_y) {
-        move_anim.to = Qt.point(new_x,new_y)
-        move_anim.duration = Storage.animation_speed
-        move_anim.start()
+        move_anim_x.to = new_x
+        move_anim_x.duration = 200
+        move_anim_y.to = new_y
+        move_anim_y.duration = 200
+        move_anim_x.start()
+        move_anim_y.start()
     }
 }
 

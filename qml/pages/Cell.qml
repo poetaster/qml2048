@@ -18,16 +18,11 @@
  * Authors: Fabien Proriol
  */
 
-#include <sailfishapp.h>
-#include <QtQuick>
 
-int main(int argc, char *argv[])
-{
-    QGuiApplication *app = SailfishApp::application(argc, argv);
-    QQuickView *view = SailfishApp::createView();
+import QtQuick 2.0
+import Sailfish.Silica 1.0
 
-    view->setSource(SailfishApp::pathTo("qml/main.qml"));
-    view->showFullScreen();
-
-    return app->exec();
+Rectangle {
+    radius: 3
+    color: "#cdc0b4"
 }

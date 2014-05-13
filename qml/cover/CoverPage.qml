@@ -18,16 +18,32 @@
  * Authors: Fabien Proriol
  */
 
-#include <sailfishapp.h>
-#include <QtQuick>
+import QtQuick 2.0
+import Sailfish.Silica 1.0
 
-int main(int argc, char *argv[])
-{
-    QGuiApplication *app = SailfishApp::application(argc, argv);
-    QQuickView *view = SailfishApp::createView();
+CoverBackground {
+    Column {
+        x: Theme.paddingMedium
+        y: Theme.paddingMedium
+        width: parent.width - 2*x
+        spacing: Theme.paddingMedium
+        Label {
+            anchors.horizontalCenter: parent.horizontalCenter
+            font.bold: true
+            text: "2048"
+        }
 
-    view->setSource(SailfishApp::pathTo("qml/main.qml"));
-    view->showFullScreen();
+        Label {
+            text: qsTr("Score: ") +app.scoreItem
+        }
 
-    return app->exec();
+        Label {
+            text: qsTr("Best tile: ") +app.scoreBest
+        }
+
+        Label {
+            text: qsTr("High score: ") +app.scoreHigh
+        }
+
+    }
 }

@@ -18,16 +18,14 @@
  * Authors: Fabien Proriol
  */
 
-#include <sailfishapp.h>
-#include <QtQuick>
+function saveSpeed() {
+    Storage.setState("speed",speedButton.checkedButton.speed)
+}
 
-int main(int argc, char *argv[])
-{
-    QGuiApplication *app = SailfishApp::application(argc, argv);
-    QQuickView *view = SailfishApp::createView();
-
-    view->setSource(SailfishApp::pathTo("qml/main.qml"));
-    view->showFullScreen();
-
-    return app->exec();
+function loadSpeed() {
+    switch (Storage.getState("speed")) {
+    case '400'  :   slowSpeedButton.checked = true;     break
+    case '100'  :   fastSpeedButton.checked = true;     break
+    default     :   normalSpeedButton.checked = true;   break
+    }
 }
