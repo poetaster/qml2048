@@ -25,33 +25,14 @@ import Sailfish.Silica 1.0
 Page {
     SilicaFlickable {
         anchors.fill: parent
-            id: gameArea
+        id: gameArea
 
         ScoreArea {
             id: score
             anchors.horizontalCenter: parent.horizontalCenter
             width: parent.width - 10
-            height: board.y - 10
+            height: 200
             y: 5
-        }
-
-        Board {
-            id: board
-            anchors.centerIn: parent
-            width: parent.width - 10
-
-            onMerged: score.addScore(value, grid_size)
-            onEnd: loseScreen.show()
-
-            SwipeArea {
-                id: swipe
-                anchors.fill: parent
-
-                onSwipeUp: board.moveTilesUp()
-                onSwipeDown: board.moveTilesDown()
-                onSwipeLeft: board.moveTilesLeft()
-                onSwipeRight: board.moveTilesRight()
-            }
         }
 
         PullDownMenu {
@@ -64,7 +45,27 @@ Page {
                 text: qsTr("About")
                 onClicked: about.open()
             }
+        }
+    }
 
+    Board {
+        id: board
+        anchors.bottom: parent.bottom
+        anchors.bottomMargin: 150
+        anchors.horizontalCenter: parent.horizontalCenter
+        width: parent.width - 10
+
+        onMerged: score.addScore(value, grid_size)
+        onEnd: loseScreen.show()
+
+        SwipeArea {
+            id: swipe
+            anchors.fill: parent
+
+            onSwipeUp: board.moveTilesUp()
+            onSwipeDown: board.moveTilesDown()
+            onSwipeLeft: board.moveTilesLeft()
+            onSwipeRight: board.moveTilesRight()
         }
     }
 
