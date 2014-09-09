@@ -31,13 +31,28 @@ ApplicationWindow
     property int scoreItem
     property int scoreBest
     property int scoreHigh
+    property string scoreName
 
     id: app
     initialPage: mainPage
     cover: Qt.resolvedUrl("cover/CoverPage.qml")
-    Component.onCompleted: mainPage.newGameRequest()
+    Component.onCompleted: {
+        if(Storage.getState("name"))
+            scoreName = Storage.getState("name")
+        if(app.scoreName.length > 1)
+            mainPage.newGameRequest()
+        else
+            mainPage.firstStart()
+    }
 
     MainPage {
         id: mainPage
     }
+
+    function setName(name)
+    {
+        scoreName = name
+        Storage.setState("name",name)
+    }
+
 }

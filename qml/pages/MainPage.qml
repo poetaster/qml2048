@@ -37,6 +37,11 @@ Page {
 
         PullDownMenu {
             MenuItem {
+                text: qsTr("Settings")
+                onClicked: settings.open()
+            }
+
+            MenuItem {
                 text: qsTr("New game")
                 onClicked: newgame.open()
             }
@@ -96,7 +101,7 @@ Page {
 
     About {
         id: about
-        version: "v.0.3.3"
+        version: "v.0.4.0"
         height: parent.height
         width: parent.width
     }
@@ -114,9 +119,36 @@ Page {
         }
     }
 
+    Dialog {
+        id: settings
+
+        DialogHeader {
+            title: qsTr("Settings")
+        }
+
+        TextField {
+            id: inputname
+            anchors { left: parent.left; right: parent.right; }
+            y: 150
+            label: qsTr("Your name for hight score")
+            placeholderText: qsTr("Your name for hight score")
+        }
+
+        onAccepted: {
+            board.focus = true
+            settings.close()
+            app.setName(inputname.text)
+            mainPage.newGameRequest()
+        }
+    }
 
     function newGameRequest(size) {
         score.reset(size)
         board.newGame(size)
+    }
+
+    function firstStart()
+    {
+        settings.open()
     }
 }

@@ -34,6 +34,10 @@ CoverBackground {
         }
 
         Label {
+            text: app.scoreName
+        }
+
+        Label {
             text: qsTr("Score: ") +app.scoreItem
         }
 
