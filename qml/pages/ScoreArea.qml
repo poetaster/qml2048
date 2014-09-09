@@ -43,9 +43,13 @@ Row {
     {
         scoreItem.value += scoreToAdd
         if(bestItem.value < scoreItem.value)
+        {
             bestItem.value = scoreItem.value
+            storeHighscore()
+        }
         app.scoreItem = scoreItem.value
-        app.scoreBest = scoreToAdd
+        if(app.scoreBest < scoreToAdd)
+            app.scoreBest = scoreToAdd
     }
 
     function storeHighscore() {
