@@ -38,6 +38,10 @@ CoverBackground {
         }
 
         Label {
+            text: qsTr("Size: ") +app.scoreMode+"x"+app.scoreMode
+        }
+
+        Label {
             text: qsTr("Score: ") +app.scoreItem
         }
 
@@ -48,6 +52,5 @@ CoverBackground {
         Label {
             text: qsTr("High score: ") +app.scoreHigh
         }
-
     }
 }
