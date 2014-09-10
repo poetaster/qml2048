@@ -46,12 +46,23 @@ Dialog {
         x: Theme.paddingLarge
         text: qsTr("Based on the port for Harmattan by raandoom")
         font.pixelSize: Theme.fontSizeExtraSmall
+        width: parent.width
+    }
+
+    Text {
+        x: Theme.paddingLarge
+        text: qsTr("If you want to make donation, you can send bitcoins to 12Zrqvi4S8a4Qme5Ynh9EJsRHSqyKMaf1z")
+        font.pixelSize: Theme.fontSizeExtraSmall
+        width: parent.width
+        wrapMode:Text.WrapAtWordBoundaryOrAnywhere
+        color: "#FFFFFF"
     }
 
     Button {
        id: homepage
        anchors.horizontalCenter: parent.horizontalCenter
        text: "<a href=\"https://github.com/condo4/qml2048tr\">Sourcecode on Github</a>"
+       width: parent.width
        onClicked: {
            Qt.openUrlExternally("https://github.com/condo4/qml2048")
        }
