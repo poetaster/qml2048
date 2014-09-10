@@ -106,6 +106,7 @@ function updateBackground() {
 // add some random tiles
 function addStartTiles() {
     for (var i = 0; i < start_count; i++) {
+        app.addlog("#")
         addRandomTile()
     }
 }
@@ -131,6 +132,7 @@ function addRandomTile() {
             var position = cellPosition(row(avIndex),column(avIndex))
             tileObj.show(position,cell_size)
             tiles[avIndex] = tileObj
+            app.addlog(value+""+row(avIndex) + "" +column(avIndex))
 
             if (!cellsAvailable() && !mergeAvailable()) {
                 end()
@@ -247,6 +249,7 @@ function updateTiles(moved) {
 function moveTilesUp() {
     var moved = false
     var captured = false
+    app.addlog("U")
     for (var column = 0; column < grid_size; column++) {
         for (var row = 0; row < grid_size; row++) {
             if (row > 0) {
@@ -285,6 +288,7 @@ function moveTilesUp() {
 function moveTilesDown() {
     var moved = false
     var captured = false
+    app.addlog("D")
     for (var column = 0; column < grid_size; column++) {
         var row = grid_size
         while (row--) {
@@ -324,6 +328,7 @@ function moveTilesDown() {
 function moveTilesLeft() {
     var moved = false
     var captured = false
+    app.addlog("L")
     for (var row = 0; row < grid_size; row++) {
         for (var column = 0; column < grid_size; column++) {
             if (column > 0) {
@@ -363,6 +368,7 @@ function moveTilesLeft() {
 function moveTilesRight() {
     var moved = false
     var captured = false
+    app.addlog("R")
     for (var row = 0; row < grid_size; row++) {
         var column = grid_size
         while (column--) {

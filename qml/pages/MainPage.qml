@@ -27,12 +27,37 @@ Page {
         anchors.fill: parent
         id: gameArea
 
+        Text {
+            y:10
+            width: parent.width
+            horizontalAlignment: Text.AlignHCenter
+            height: 20
+            anchors.horizontalCenter: parent.horizontalCenter
+            text: app.scoreName
+            font.pixelSize: 30
+            font.bold: true
+            color: "#ffffff"
+        }
+
         ScoreArea {
             id: score
             anchors.horizontalCenter: parent.horizontalCenter
             width: parent.width - 10
-            height: 200
-            y: 5
+            height: 240
+            y: 20
+        }
+
+        Text {
+            y:265
+            width: parent.width
+            horizontalAlignment: Text.AlignHCenter
+            height: 20
+            anchors.horizontalCenter: parent.horizontalCenter
+            text: "Community hightscore: " + app.communityScore + " (best tile " + app.communityTile + ")"
+            font.pixelSize: 20
+            font.bold: true
+            color: "#ffffff"
+            visible: app.communityScore > 100
         }
 
         PullDownMenu {
@@ -56,12 +81,17 @@ Page {
     Board {
         id: board
         anchors.bottom: parent.bottom
-        anchors.bottomMargin: 150
+        anchors.bottomMargin: 90
         anchors.horizontalCenter: parent.horizontalCenter
         width: parent.width - 10
 
         onMerged: score.addScore(value, grid_size)
-        onEnd: loseScreen.show()
+        onEnd: {
+            loseScreen.show()
+            if(app.scoreMode <= 2 && app.scoreBest >= 32) app.sendscore()
+            else if(app.scoreMode <= 3 && app.scoreBest >= 128) app.sendscore()
+            else if(app.scoreBest >= 2^(app.scoreMode + 7)) app.sendscore()
+        }
 
         SwipeArea {
             id: swipe
@@ -122,27 +152,62 @@ Page {
     Dialog {
         id: settings
 
-        DialogHeader {
-            title: qsTr("Settings")
+        SilicaFlickable {
+            VerticalScrollDecorator {}
+
+            anchors.fill: parent
+            contentHeight: column.height + Theme.paddingLarge
+
+            Column {
+                id: column
+                width: parent.width
+                spacing: Theme.paddingLarge
+
+
+                DialogHeader {
+                    title: qsTr("Settings")
+                }
+
+
+                TextField {
+                    id: inputname
+                    anchors { left: parent.left; right: parent.right; }
+                    label: qsTr("Your name for hight score")
+                    placeholderText: qsTr("Your name for hight score")
+                }
+                Switch {
+                    id: strangeworkarround
+                    icon.source: "mute.png"
+                }
+                TextSwitch {
+                    id: sharedinput
+                    text: qsTr("Share score")
+                    description: qsTr("Send your hightscore if you have more than 2048 tile")
+                    visible: inputname.text != ""
+                }
+            }
         }
 
-        TextField {
-            id: inputname
-            anchors { left: parent.left; right: parent.right; }
-            y: 150
-            label: qsTr("Your name for hight score")
-            placeholderText: qsTr("Your name for hight score")
+        onOpened: {
+            inputname.text = app.scoreName
+            sharedinput.checked = app.shareMode
         }
 
         onAccepted: {
             board.focus = true
             settings.close()
             app.setName(inputname.text)
+            app.setShared(sharedinput.checked)
             mainPage.newGameRequest()
+        }
+        onCanceled: {
+            board.focus = true
+            settings.close()
         }
     }
 
     function newGameRequest(size) {
+        app.resetlog()
         score.reset(size)
         board.newGame(size)
     }

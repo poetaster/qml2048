@@ -32,8 +32,10 @@ Row {
         if (boardSize == null)
             boardSize = currentBoardSize
 
+        app.addlog("{"+boardSize+"}")
         storeHighscore()
         currentBoardSize = boardSize
+        app.getCommunity(boardSize)
         scoreItem.value = 0
         bestItem.value = Storage.getHighscore(boardSize)
         app.scoreHigh = bestItem.value
@@ -62,13 +64,15 @@ Row {
 
     Component.onDestruction: storeHighscore()
 
+
+
     ScoreItem {
         id: scoreItem
         text: "SCORE"
         value: 0
 
         width: parent.width / 2
-        height:parent.height
+        height:250
     }
 
     ScoreItem {
@@ -77,6 +81,6 @@ Row {
         value: 0
 
         width: parent.width / 2
-        height:parent.height
+        height:250
     }
 }

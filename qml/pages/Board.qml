@@ -42,6 +42,7 @@ Rectangle {
     function newGame(size) {
         if (size == null)
             size = grid_size
+        app.scoreMode = size
         Board.newGame(size)
     }
 
