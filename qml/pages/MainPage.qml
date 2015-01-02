@@ -53,7 +53,7 @@ Page {
             horizontalAlignment: Text.AlignHCenter
             height: 20
             anchors.horizontalCenter: parent.horizontalCenter
-            text: "Community hightscore: " + app.communityScore + " (best tile " + app.communityTile + ")"
+            text: "Community highscore: " + app.communityScore + " (best tile " + app.communityTile + ")"
             font.pixelSize: 20
             font.bold: true
             color: "#ffffff"
@@ -172,18 +172,18 @@ Page {
                 TextField {
                     id: inputname
                     anchors { left: parent.left; right: parent.right; }
-                    label: qsTr("Your name for hight score")
-                    placeholderText: qsTr("Your name for hight score")
+                    label: qsTr("Your name for highscore")
+                    placeholderText: qsTr("Your name for highscore")
                 }
                 Switch {
                     id: strangeworkarround
-                    icon.source: "mute.png"
+                    icon.source: "image://theme/icon-m-speaker-mute"
                 }
                 TextSwitch {
                     id: sharedinput
                     text: qsTr("Share score")
-                    description: qsTr("Send your hightscore if you have more than 2048 tile")
-                    visible: inputname.text != ""
+                    description: qsTr("Send your highscore if you have more than 2048 tile")
+                    visible: inputname.text !== ""
                 }
             }
         }
