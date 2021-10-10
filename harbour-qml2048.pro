@@ -11,7 +11,8 @@ SOURCES += main.cpp
 
 OTHER_FILES += \
     harbour-qml2048.desktop \
-    rpm/qml2048.yaml \
+
+SAILFISHAPP_ICONS = 86x86 108x108 128x128 172x172
 
 lupdate_only{
     SOURCES += qml/*.qml \
@@ -19,3 +20,7 @@ lupdate_only{
     SOURCES += qml/pages/*.qml \
     SOURCES += qml/pages/*.js
 }
+
+DISTFILES += \
+    rpm/harbour-qml2048.yaml \
+    rpm/harbour-qml2048.spec

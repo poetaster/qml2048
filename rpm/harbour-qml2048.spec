@@ -12,15 +12,15 @@ Name:       harbour-qml2048
 %{!?qtc_qmake5:%define qtc_qmake5 %qmake5}
 %{!?qtc_make:%define qtc_make make}
 %{?qtc_builddir:%define _builddir %qtc_builddir}
-Summary:    2048
-Version:    0.3
-Release:    0
+Summary:    2048 tile game
+Version:    0.4
+Release:    1
 Group:      Qt/Qt
-License:    GPL
-URL:        https://github.com/condo4/qml2048
+License:    GPLv3
+URL:        https://github.com/poetaster/qml2048
 Source0:    %{name}-%{version}.tar.bz2
 Source100:  harbour-qml2048.yaml
-Requires:   sailfishsilica-qt5
+Requires:   sailfishsilica-qt5 >= 0.10.9
 BuildRequires:  pkgconfig(sailfishapp)
 BuildRequires:  pkgconfig(Qt5Quick)
 BuildRequires:  pkgconfig(Qt5Qml)
@@ -28,7 +28,7 @@ BuildRequires:  pkgconfig(Qt5Core)
 BuildRequires:  desktop-file-utils
 
 %description
-2048 Game
+2048 Tile Game
 
 %prep
 %setup -q -n %{name}-%{version}
@@ -63,11 +63,8 @@ desktop-file-install --delete-original       \
 %files
 %defattr(-,root,root,-)
 %{_bindir}
-%{_datadir}/%{name}/qml
-%{_datadir}/applications/%{name}.desktop
-%{_datadir}/icons/hicolor/86x86/apps/%{name}.png
-%{_datadir}/applications
-%{_datadir}/icons/hicolor/86x86/apps
 %{_datadir}/%{name}
+%{_datadir}/applications/%{name}.desktop
+%{_datadir}/icons/hicolor/*/apps/%{name}.png
 # >> files
 # << files
